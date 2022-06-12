@@ -1,42 +1,25 @@
-# Nuxt 3 Minimal Starter
+## App Description
+This web app scrapes Kobo.com and compares an ebook's different prices for each available country. It has three pages:
+* Page 1 : Main page with search bar.
+* Page 2 : List of books.
+* Page 3 : Ebook's prices comparation.
 
-Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
+You can check out the app at: 
 
-## Setup
+## Techs used
+* Nuxt 3
+* Vue 3
 
-Make sure to install the dependencies:
+## Setup if you wanna give the code a look
+Install the dependencies:
 
 ```bash
-# yarn
-yarn install
-
 # npm
 npm install
-
-# pnpm
-pnpm install --shamefully-hoist
 ```
-
-## Development Server
-
-Start the development server on http://localhost:3000
+And start the development server on http://localhost:3000
 
 ```bash
 npm run dev
 ```
-
-## Production
-
-Build the application for production:
-
-```bash
-npm run build
-```
-
-Locally preview production build:
-
-```bash
-npm run preview
-```
-
-Checkout the [deployment documentation](https://v3.nuxtjs.org/guide/deploy/presets) for more information.
+Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
