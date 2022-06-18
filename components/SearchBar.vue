@@ -21,11 +21,29 @@ watch(
   }
 );
 function lookForBook() {
-  let book = valoringresado.value.split(/https:\/\/www.kobo.com\/.*\/ebook\//);
-  return navigateTo({
-    path: "/prices",
-    query: { book: book[1] },
-  });
+  let book = valoringresado.value.split(
+    /https:\/\/www.kobo.com\/.*\/(ebook|audiobook)\//
+  );
+
+  if (
+    /^https:\/\/www.kobo.com\/([a-z]{2,})\/([a-z]{2,})\/ebook\/.*/.test(
+      valoringresado.value
+    )
+  ) {
+    return navigateTo({
+      path: "/prices",
+      query: { book: book[2], type: "ebook" },
+    });
+  } else if (
+    /^https:\/\/www.kobo.com\/([a-z]{2,})\/([a-z]{2,})\/audiobook\/.*/.test(
+      valoringresado.value
+    )
+  ) {
+    return navigateTo({
+      path: "/prices",
+      query: { book: book[2], type: "audiobook" },
+    });
+  }
 }
 function lookForBooks() {
   return navigateTo({
@@ -35,7 +53,7 @@ function lookForBooks() {
 }
 function lookFor() {
   if (
-    /^https:\/\/www.kobo.com\/([a-z]{2,})\/([a-z]{2,})\/ebook\/.*/.test(
+    /^https:\/\/www.kobo.com\/([a-z]{2,})\/([a-z]{2,})\/(ebook|audiobook)\/.*/.test(
       valoringresado.value
     )
   )

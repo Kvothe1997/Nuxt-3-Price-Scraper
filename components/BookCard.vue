@@ -19,10 +19,28 @@ const props = defineProps({
   urlProp: String,
 });
 function navigateToBook() {
-  let book = props.urlProp.split(/https:\/\/www.kobo.com\/.*\/ebook\//);
-  return navigateTo({
-    path: "/prices",
-    query: { book: book[1] },
-  });
+  let book = props.urlProp.split(
+    /https:\/\/www.kobo.com\/.*\/(ebook|audiobook)\//
+  );
+
+  if (
+    /^https:\/\/www.kobo.com\/([a-z]{2,})\/([a-z]{2,})\/ebook\/.*/.test(
+      props.urlProp
+    )
+  ) {
+    return navigateTo({
+      path: "/prices",
+      query: { book: book[2], type: "ebook" },
+    });
+  } else if (
+    /^https:\/\/www.kobo.com\/([a-z]{2,})\/([a-z]{2,})\/audiobook\/.*/.test(
+      props.urlProp
+    )
+  ) {
+    return navigateTo({
+      path: "/prices",
+      query: { book: book[2], type: "audiobook" },
+    });
+  }
 }
 </script>

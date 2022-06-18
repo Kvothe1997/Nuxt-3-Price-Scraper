@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 @click="navigateHome">Kobo ebook Price Scraper</h1>
+    <h1><NuxtLink to="/">Kobo ebook Price Scraper</NuxtLink></h1>
     <SearchBar />
     <BookCard
       v-for="bookCard in bookCards"
@@ -29,7 +29,7 @@ watch(
   async () => {
     if (route.name === "search") {
       data.fetched = await $fetch(`/api/books?search=${route.query.books}`);
-      await updateBookCards();
+      await updateBookCards(); // maybe sacar el await para que cargue el logo de la página? y ponerle v if a las bookcards
     }
   }
 );
@@ -70,11 +70,6 @@ async function updateBookCards() {
       url: bookCardUrl,
     });
   }
-}
-function navigateHome() {
-  return navigateTo({
-    path: "/",
-  });
 }
 </script>
 <style></style>

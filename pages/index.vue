@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Kobo ebook Price Scraper</h1>
+    <h1><NuxtLink to="/">Kobo ebook Price Scraper</NuxtLink></h1>
     <p>
       Insert the Kobo ebook's link or the name of the book you're looking for.
     </p>
