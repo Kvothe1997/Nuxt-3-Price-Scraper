@@ -1,15 +1,11 @@
 <template>
   <main>
-    <ul>
-     
-    </ul>
+    <ul></ul>
     <BodyBackButton />
     <BodyBookCard />
     <BodyPricesTable />
   </main>
 </template>
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>
 
 <style></style>

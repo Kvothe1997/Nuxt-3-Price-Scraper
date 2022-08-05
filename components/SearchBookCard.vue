@@ -1,11 +1,21 @@
 <template>
-  <article @click="navigateToBook">
-    <img :src="imageUrlProp" :alt="nameProp + ' by ' + authorProp" />
-    <h2>{{ nameProp }}</h2>
-    <p>{{ authorProp }}</p>
-    <p>{{ descriptionProp }} ...</p>
-    <p>{{ priceValueProp }}</p>
-    <p>{{ priceCurrencyProp }}</p>
+  <article
+    class="flex flex-row mx-1 my-2 border-2 border-blue"
+    @click="navigateToBook"
+  >
+    <div class="mx-1 my-1 flex justify-center">
+      <img class="" :src="imageUrlProp" :alt="nameProp + ' by ' + authorProp" />
+      <p>{{ typeProp }}</p>
+    </div>
+    <div class="mx-1">
+      <h2>{{ nameProp }}</h2>
+      <p>by {{ authorProp }}</p>
+      <p class="hidden sm:inline">{{ descriptionProp }} ...</p>
+      <div class="flex flex-row">
+        <p>{{ priceValueProp }}</p>
+        <p class="">&nbsp;{{ priceCurrencyProp }}</p>
+      </div>
+    </div>
   </article>
 </template>
 <script setup lang="ts">
@@ -16,6 +26,7 @@ const props = defineProps({
   nameProp: { type: String, required: true },
   priceValueProp: { type: String, required: true },
   priceCurrencyProp: { type: String, required: true },
+  typeProp: { type: String, required: true },
   urlProp: { type: String, required: true },
 })
 function navigateToBook() {

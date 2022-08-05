@@ -1,7 +1,9 @@
 <template>
-  <footer>
-    <small>
+  <footer class="mt-auto flex justify-center">
+    <small class="text-center text-white font-semibold mx-1 mb-2">
       &copy; Copyright 2022, Kobo Price Scraper. All Rights Reserved.
     </small>
   </footer>
 </template>
+<script setup lang="ts"></script>
+<style></style>

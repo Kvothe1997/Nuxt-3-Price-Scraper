@@ -1,18 +1,15 @@
 <template>
-<table>
+  <table>
     <thead>
-        <tr>
-            <th>Comparison</th>    
-        </tr>
-        <tr>
-            <th>Country</th>
-            <th>Price</th>
-            <th>Price in USD</th>
-        </tr>
+      <tr>
+        <th>Comparison</th>
+      </tr>
+      <tr>
+        <th>Country</th>
+        <th>Price</th>
+        <th>Price in USD</th>
+      </tr>
     </thead>
-    <tbody>
-          
-
-    </tbody>
-</table>
+    <tbody></tbody>
+  </table>
 </template>

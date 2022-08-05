@@ -1,29 +1,37 @@
 <template>
-  <input
-    v-model="valoringresado"
-    v-on:keydown.enter="lookFor"
-    type="text"
-    autocomplete="on"
-    placeholder="Book name or Kobo ebook's link"
-  />
-  <input @click="lookFor" type="submit" value="Search" />
+  <div class="flex flex-row items-stretch justify-center mb-1">
+    <input
+      v-model="valoringresado"
+      type="text"
+      autocomplete="on"
+      placeholder="Book link, title, author..."
+      class="text-lg"
+      @keydown.enter="lookFor"
+    />
+    <input
+      class="i-fluent-book-search-24-regular text-3xl text-black"
+      type="submit"
+      title="Search"
+      @click="lookFor"
+    />
+  </div>
 </template>
 
-<script setup>
-const route = useRoute();
-const valoringresado = ref(route.query.books || "");
+<script setup lang="ts">
+const route = useRoute()
+const valoringresado = ref<any>(route.query.books || '')
 watch(
   () => route.query,
-  async () => {
-    if (Object.keys(route.query)[0] == "books") {
-      valoringresado.value = route.query.books;
+  () => {
+    if (Object.keys(route.query)[0] === 'books') {
+      valoringresado.value = route.query.books
     }
   }
-);
+)
 function lookForBook() {
-  let book = valoringresado.value.split(
+  const book = valoringresado.value.split(
     /https:\/\/www.kobo.com\/.*\/(ebook|audiobook)\//
-  );
+  )
 
   if (
     /^https:\/\/www.kobo.com\/([a-z]{2,})\/([a-z]{2,})\/ebook\/.*/.test(
@@ -31,25 +39,25 @@ function lookForBook() {
     )
   ) {
     return navigateTo({
-      path: "/prices",
-      query: { book: book[2], type: "ebook" },
-    });
+      path: '/prices',
+      query: { book: book[2], type: 'ebook' },
+    })
   } else if (
     /^https:\/\/www.kobo.com\/([a-z]{2,})\/([a-z]{2,})\/audiobook\/.*/.test(
       valoringresado.value
     )
   ) {
     return navigateTo({
-      path: "/prices",
-      query: { book: book[2], type: "audiobook" },
-    });
+      path: '/prices',
+      query: { book: book[2], type: 'audiobook' },
+    })
   }
 }
 function lookForBooks() {
   return navigateTo({
-    path: "/search",
+    path: '/search',
     query: { books: valoringresado.value },
-  });
+  })
 }
 function lookFor() {
   if (
@@ -57,8 +65,8 @@ function lookFor() {
       valoringresado.value
     )
   )
-    lookForBook();
-  else lookForBooks();
+    lookForBook()
+  else lookForBooks()
 }
 </script>
 

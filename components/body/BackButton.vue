@@ -1,3 +1,3 @@
-<template>  
-<input type="button" value="Back">
+<template>
+  <input type="button" value="Back" />
 </template>
