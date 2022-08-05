@@ -28,4 +28,27 @@ useHead({
 });
 </script>
 
+<template>
+  <div
+    class="flex flex-col h-screen font-mono bg-gradient-to-t from-red-600 via-red-50 to-white"
+  >
+    <div class="h-full flex flex-col justify-center">
+      <h1 class="text-center">
+        <NuxtLink class="text-red-600 no-underline text-4xl" to="/"
+          >Kobo Price Scraper</NuxtLink
+        >
+      </h1>
+      <p class="text-center text-3xl">
+        This app let's you know the prices of a Kobo ebook in every available
+        country.
+      </p>
+      <p class="text-center text-lg">
+        Insert the Kobo ebook's link or the title of the book you're looking
+        for.
+      </p>
+      <SearchBar />
+    </div>
+    <PieDePagina />
+  </div>
+</template>
 <style></style>
