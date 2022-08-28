@@ -1,12 +1,12 @@
 <script setup lang="ts">
 useHead({
-  title: 'Kobo Price Scraper',
+  title: "Kobo Price Scraper: Ebook's prices comparison",
   titleTemplate: 'Kobo Price Scraper',
   viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
   charset: 'utf-8',
   meta: [
     {
-      name: 'Kobo Price Scraper',
+      name: 'description',
       content:
         "In which country is it cheaper to buy this Kobo Ebook? Well, let's find it out. Insert the name or the Kobo page link of the book you're looking for.",
     },
