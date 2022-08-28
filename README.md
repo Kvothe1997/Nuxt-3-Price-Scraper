@@ -3,8 +3,8 @@
 This web app scrapes Kobo.com and compares an ebook's different prices for each available country. It has three pages:
 
 - Page 1 : Main page with search bar.
-- Page 2 : List of books.
-- Page 3 : Ebook's prices comparation.
+- Page 2 : List of searched books.
+- Page 3 : Ebook's prices comparison.
 
 You can check out the app at:
 
