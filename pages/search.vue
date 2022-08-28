@@ -1,3 +1,127 @@
+<script setup lang="ts">
+interface BookCards {
+  author: string
+  description: string
+  imageUrl: string
+  name: string
+  priceValue: string
+  priceCurrency: string
+  type: string
+  url: string
+}
+interface Data {
+  api: string
+}
+const bookCards: Array<BookCards> = reactive([])
+const route = useRoute()
+onMounted(async () => {
+  const data: Data = await $fetch(`/api/books?search=${route.query.books}`)
+  updateBookCards(data.api)
+})
+watch(
+  () => route.query,
+  async () => {
+    if (route.name === 'search') {
+      const data: Data = await $fetch(`/api/books?search=${route.query.books}`)
+      await updateBookCards(data.api) // maybe sacar el await para que cargue el logo de la página? y ponerle v if a las bookcards
+    }
+  }
+)
+function updateBookCards(pageFetchedText: string) {
+  if (pageFetchedText !== '') {
+    bookCards.length = 0
+    const parser = new DOMParser()
+    const doc = parser.parseFromString(pageFetchedText, 'text/html')
+    const docBooksList = doc.getElementsByClassName('item-detail')
+    for (const docBook of docBooksList) {
+      const bookCardUrl = (docBook.querySelector(
+        '.title.product-field a'
+      ) as HTMLAnchorElement | null)
+        ? (
+            docBook.querySelector(
+              '.title.product-field a'
+            ) as HTMLAnchorElement | null
+          )?.href
+        : ''
+      const bookCardName = (docBook.querySelector(
+        '.title.product-field a'
+      ) as HTMLElement | null)
+        ? (
+            docBook.querySelector(
+              '.title.product-field a'
+            ) as HTMLElement | null
+          )?.innerText
+        : ''
+      const bookCardImageUrl =
+        docBook.querySelector('.cover-image')?.getAttribute('data-lazy') ||
+        (docBook.querySelector('.cover-image') as HTMLImageElement | null)?.src
+      const bookCardType = docBook.querySelector(
+        'product-type-field secondary-field'
+      )
+        ? (
+            docBook.querySelector(
+              'product-type-field secondary-field'
+            ) as HTMLElement | null
+          )?.innerText
+        : ''
+      const bookCardDescription = docBook.querySelector(
+        '.synopsis .synopsis-text'
+      )
+        ? (
+            docBook.querySelector(
+              '.synopsis .synopsis-text'
+            ) as HTMLElement | null
+          )?.innerText
+        : ''
+      const bookCardAuthor = docBook.querySelector('.contributor-name')
+        ? (docBook.querySelector('.contributor-name') as HTMLElement | null)
+            ?.innerText
+        : ''
+      const bookCardPriceValue = docBook.querySelector(
+        '.price-value span span span:first-child'
+      )
+        ? (
+            docBook.querySelector(
+              '.price-value span span span:first-child'
+            ) as HTMLElement | null
+          )?.innerText
+        : 'Free'
+      const bookCardPriceCurrency = docBook.querySelector('.currency')
+        ? (docBook.querySelector('.currency') as HTMLElement | null)?.innerText
+        : ''
+      if (
+        bookCardAuthor !== undefined &&
+        bookCardDescription !== undefined &&
+        bookCardImageUrl !== undefined &&
+        bookCardName !== undefined &&
+        bookCardPriceValue !== undefined &&
+        bookCardPriceCurrency !== undefined &&
+        bookCardType !== undefined &&
+        bookCardUrl !== undefined
+      ) {
+        bookCards.push({
+          author: bookCardAuthor,
+          description: bookCardDescription,
+          imageUrl: bookCardImageUrl,
+          name: bookCardName,
+          priceValue: bookCardPriceValue,
+          priceCurrency: bookCardPriceCurrency,
+          type: bookCardType,
+          url: bookCardUrl,
+        })
+      }
+    }
+  } else {
+    // Qué hacer si no se puede conectar con Kobo y traer las cards
+    // Presentar un mensaje o imagen para que refresque la pagina.
+    // O un botón para que presione y se refresque la página.
+    // Todo en el espacio donde irían las cards
+    console.log(
+      'We´re having problems to connet to the server. Please refresh the page.'
+    )
+  }
+}
+</script>
 <template>
   <div class="flex flex-col h-screen font-mono">
     <h1 class="flex justify-center">
@@ -8,7 +132,7 @@
     <p class="text-center">
       Select the book you want to know the prices of in every available country.
     </p>
-    <SearchBar />
+    <SearchBar class="mb-1" />
     <SearchBookCard
       v-for="bookCard in bookCards"
       :key="bookCard.name"
@@ -21,73 +145,8 @@
       :type-prop="bookCard.type"
       :url-prop="bookCard.url"
     ></SearchBookCard>
+    <p class="self-center">* More pages functionality coming soon...</p>
     <PieDePagina />
   </div>
 </template>
-<script setup lang="ts">
-const bookCards = reactive([])
-const route = useRoute()
-const data = reactive({ fetched: '' })
-onMounted(async () => {
-  data.fetched = await $fetch(`/api/books?search=${route.query.books}`)
-  updateBookCards()
-})
-watch(
-  () => route.query,
-  async () => {
-    if (route.name === 'search') {
-      data.fetched = await $fetch(`/api/books?search=${route.query.books}`)
-      await updateBookCards() // maybe sacar el await para que cargue el logo de la página? y ponerle v if a las bookcards
-    }
-  }
-)
-function updateBookCards() {
-  bookCards.length = 0
-  const text = JSON.parse(JSON.stringify(data.fetched.api))
-  const parser = new DOMParser()
-  const doc = parser.parseFromString(text, 'text/html')
-  const docBooksList = doc.getElementsByClassName('item-detail')
-  for (const docBook of docBooksList) {
-    const bookCardUrl = docBook.querySelector('.title.product-field a').href
-    const bookCardName = docBook.querySelector(
-      '.title.product-field a'
-    ).innerText
-    const bookCardImageUrl =
-      docBook.querySelector('.cover-image').getAttribute('data-lazy') ||
-      docBook.querySelector('.cover-image').src
-    const bookCardType = docBook.querySelector(
-      'product-type-field secondary-field'
-    )
-      ? docBook.querySelector('product-type-field secondary-field').innerText
-      : ''
-    const bookCardDescription = docBook.querySelector(
-      '.synopsis .synopsis-text'
-    )
-      ? docBook.querySelector('.synopsis .synopsis-text').innerText
-      : ''
-    const bookCardAuthor = docBook.querySelector('.contributor-name')
-      ? docBook.querySelector('.contributor-name').innerText
-      : ''
-    const bookCardPriceValue = docBook.querySelector(
-      '.price-value span span span:first-child'
-    )
-      ? docBook.querySelector('.price-value span span span:first-child')
-          .innerText
-      : 'Free'
-    const bookCardPriceCurrency = docBook.querySelector('.currency')
-      ? docBook.querySelector('.currency').innerText
-      : ''
-    bookCards.push({
-      author: bookCardAuthor,
-      description: bookCardDescription,
-      imageUrl: bookCardImageUrl,
-      name: bookCardName,
-      priceValue: bookCardPriceValue,
-      priceCurrency: bookCardPriceCurrency,
-      type: bookCardType,
-      url: bookCardUrl,
-    })
-  }
-}
-</script>
 <style></style>

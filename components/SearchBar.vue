@@ -1,22 +1,3 @@
-<template>
-  <div class="flex flex-row items-stretch justify-center mb-1">
-    <input
-      v-model="valoringresado"
-      type="text"
-      autocomplete="on"
-      placeholder="Book link, title, author..."
-      class="text-lg"
-      @keydown.enter="lookFor"
-    />
-    <input
-      class="i-fluent-book-search-24-regular text-3xl text-black"
-      type="submit"
-      title="Search"
-      @click="lookFor"
-    />
-  </div>
-</template>
-
 <script setup lang="ts">
 const route = useRoute()
 const valoringresado = ref<any>(route.query.books || '')
@@ -69,5 +50,24 @@ function lookFor() {
   else lookForBooks()
 }
 </script>
+
+<template>
+  <div class="flex flex-row items-stretch justify-center">
+    <input
+      v-model="valoringresado"
+      type="text"
+      autocomplete="on"
+      placeholder="Book link, title, author..."
+      class="text-lg"
+      @keydown.enter="lookFor"
+    />
+    <input
+      class="i-fluent-book-search-24-regular text-3xl text-black"
+      type="submit"
+      title="Search"
+      @click="lookFor"
+    />
+  </div>
+</template>
 
 <style></style>

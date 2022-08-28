@@ -1,23 +1,3 @@
-<template>
-  <article
-    class="flex flex-row mx-1 my-2 border-2 border-blue"
-    @click="navigateToBook"
-  >
-    <div class="mx-1 my-1 flex justify-center">
-      <img class="" :src="imageUrlProp" :alt="nameProp + ' by ' + authorProp" />
-      <p>{{ typeProp }}</p>
-    </div>
-    <div class="mx-1">
-      <h2>{{ nameProp }}</h2>
-      <p>by {{ authorProp }}</p>
-      <p class="hidden sm:inline">{{ descriptionProp }} ...</p>
-      <div class="flex flex-row">
-        <p>{{ priceValueProp }}</p>
-        <p class="">&nbsp;{{ priceCurrencyProp }}</p>
-      </div>
-    </div>
-  </article>
-</template>
 <script setup lang="ts">
 const props = defineProps({
   authorProp: { type: String, required: true },
@@ -55,3 +35,23 @@ function navigateToBook() {
   }
 }
 </script>
+<template>
+  <article
+    class="flex flex-row mx-1 my-2 border-2 border-blue"
+    @click="navigateToBook"
+  >
+    <div class="mx-1 my-1 flex justify-center">
+      <img :src="imageUrlProp" :alt="nameProp + ' by ' + authorProp" />
+      <p>{{ typeProp }}</p>
+    </div>
+    <div class="mx-1">
+      <h2>{{ nameProp }}</h2>
+      <p>by {{ authorProp }}</p>
+      <p class="hidden sm:inline">{{ descriptionProp }} ...</p>
+      <div class="flex flex-row">
+        <p>{{ priceValueProp }}</p>
+        <p class="">&nbsp;{{ priceCurrencyProp }}</p>
+      </div>
+    </div>
+  </article>
+</template>

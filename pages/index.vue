@@ -35,9 +35,9 @@ useHead({
         Insert the Kobo ebook's link or the title of the book you're looking
         for.
       </p>
-      <SearchBar />
+      <SearchBar class="mb-1" />
     </div>
-    <PieDePagina />
+    <PieDePagina class="text-white" />
   </div>
 </template>
 
