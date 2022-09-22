@@ -6,7 +6,7 @@ This web app scrapes Kobo.com and compares an ebook's different prices for each 
 - Page 2 : List of searched books.
 - Page 3 : Ebook's prices comparison.
 
-You can check out the app at: https://kobo-price-scraper.vercel.app/
+You can check out the app at: https://www.kobo-price-scraper.com/
 
 ## Techs used
 
