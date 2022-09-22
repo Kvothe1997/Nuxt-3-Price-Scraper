@@ -1,13 +1,5 @@
 <script setup lang="ts">
 useHead({
-  script: [
-    {
-      async: 'true',
-      src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3787111415027881',
-      crossorigin: 'anonymous',
-    },
-  ],
-  title: "Kobo Price Scraper: Ebook's prices comparison",
   titleTemplate: 'Kobo Price Scraper',
   viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
   charset: 'utf-8',

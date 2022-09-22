@@ -1,13 +1,6 @@
 <script setup lang="ts">
 // SEO
 useHead({
-  script: [
-    {
-      async: 'true',
-      src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3787111415027881',
-      crossorigin: 'anonymous',
-    },
-  ],
   title: "Kobo Price Scraper: Ebook's prices comparison",
   titleTemplate: 'Kobo Price Scraper',
   viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
@@ -304,7 +297,7 @@ async function fillPage() {
 
 <template>
   <div class="flex flex-col min-h-screen font-mono justify-center">
-    <h1 class="flex justify-center">
+    <h1 class="text-center">
       <NuxtLink class="text-red-600 no-underline" to="/"
         >Kobo Price Scraper</NuxtLink
       >
